@@ -1,5 +1,6 @@
 import Versions from './components/Versions'
 import electronLogo from './assets/electron.svg'
+import { Link } from 'react-router-dom'
 
 function App(): JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
@@ -28,6 +29,13 @@ function App(): JSX.Element {
         </div>
       </div>
       <Versions></Versions>
+
+      <div>
+        <div>{location.href}</div>
+        <div>
+          <Link to="/contacts/1">contacts/1</Link>
+        </div>
+      </div>
     </>
   )
 }
