@@ -2,6 +2,7 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { BrowserWindow, app, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
+import { setupMenu } from './setupMenu'
 import { setupTRPC } from './setupTRPC'
 
 function createWindow(): void {
@@ -17,6 +18,8 @@ function createWindow(): void {
       sandbox: false
     }
   })
+
+  setupMenu(mainWindow)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
