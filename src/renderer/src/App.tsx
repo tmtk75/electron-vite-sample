@@ -33,9 +33,14 @@ function App(): JSX.Element {
 
       <div>
         <div>{location.href}</div>
-        <div>
-          <Link to="/contacts/1">contacts/1</Link>
-        </div>
+        <ul>
+          <li>
+            <Link to="/contacts/1">contacts/1</Link>
+          </li>
+          <li>
+            <Link to="/sandbox">sandbox</Link>
+          </li>
+        </ul>
       </div>
     </>
   )

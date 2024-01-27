@@ -6,6 +6,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import App from './App'
 import ErrorPage from './error-page'
 import Contact from './routes/contact'
+import { Sandbox } from './routes/sandbox'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         element: <Contact />
       }
     ]
+  },
+  {
+    path: '/sandbox',
+    element: <Sandbox />
   }
 ])
 
