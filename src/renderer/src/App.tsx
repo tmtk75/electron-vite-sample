@@ -1,9 +1,14 @@
 import Versions from './components/Versions'
 import electronLogo from './assets/electron.svg'
 import { Link } from 'react-router-dom'
+import { trpc } from './trpc'
 
 function App(): JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  const userList = trpc.user.userList.useQuery()
+  const create = trpc.user.userCreate.useMutation()
+  if (!userList.isFetched) {
+    return <></>
+  }
 
   return (
     <>
@@ -24,7 +29,14 @@ function App(): JSX.Element {
           </a>
         </div>
         <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            onClick={async () => {
+              const v = await create.mutateAsync({ name: 'test', time: new Date() })
+              console.debug(`userCreate`, v)
+            }}
+          >
             Send IPC
           </a>
         </div>
@@ -41,6 +53,15 @@ function App(): JSX.Element {
             <Link to="/sandbox">sandbox</Link>
           </li>
         </ul>
+        <ol>
+          {userList.data?.map((user) => {
+            return (
+              <li key={user.id}>
+                {user.id}: {user.name}
+              </li>
+            )
+          })}
+        </ol>
       </div>
     </>
   )
